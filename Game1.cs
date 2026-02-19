@@ -9,25 +9,28 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
+    private Texture2D _background;
+
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
     }
-
+    
     protected override void Initialize()
     {
-        // TODO: Add your initialization logic here
-
+        _graphics.PreferredBackBufferWidth = 778;
+        _graphics.PreferredBackBufferHeight = 350;
+        _graphics.ApplyChanges();
+        
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-        // TODO: use this.Content to load your game content here
+        _background = Content.Load<Texture2D>("background");
     }
 
     protected override void Update(GameTime gameTime)
@@ -36,15 +39,17 @@ public class Game1 : Game
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        // TODO: Add your update logic here
-
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
+        _spriteBatch.Begin();
         
+        _spriteBatch.Draw(_background, new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight), Color.White);
+        _spriteBatch.End();
+
         base.Draw(gameTime);
     }
 }
