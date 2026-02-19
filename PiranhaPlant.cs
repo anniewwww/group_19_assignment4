@@ -31,7 +31,7 @@ namespace group_19_assignment4
         {
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             
-            _extensionY = MathF.Sin(_timer * 3) * 17f - 25f; 
+            _extensionY = MathF.Sin(_timer * 3) * 17f - 35f; 
             
             _rootMatrix = Matrix.CreateScale(0.15f) * Matrix.CreateTranslation(_basePosition.X, _basePosition.Y + _extensionY, 0);
 
@@ -45,7 +45,7 @@ namespace group_19_assignment4
             spriteBatch.Draw(_stemTex, Vector2.Zero, Color.White);
 
             float leftOffset = 8.5f;
-            float verticalPosition = 0f;
+            float verticalPosition = 8f;
                 
             Vector2 leftHinge = new Vector2(_jawLeftTex.Width, _jawLeftTex.Height); 
             spriteBatch.Draw(_jawLeftTex, 
