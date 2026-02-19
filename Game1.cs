@@ -4,12 +4,12 @@ using Microsoft.Xna.Framework.Input;
 
 namespace group_19_assignment4;
 
-public class PiranhaPlant : Game
+public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
-    public PiranhaPlant()
+    public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
@@ -44,9 +44,7 @@ public class PiranhaPlant : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
-
-        // TODO: Add your drawing code here
-
+        
         base.Draw(gameTime);
     }
 }
