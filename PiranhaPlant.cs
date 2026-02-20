@@ -11,7 +11,6 @@ namespace group_19_assignment4
         private Texture2D _jawLeftTex;
         
         private Vector2 _basePosition;
-        // private float _extensionY;
         private float _jawRotation;
         private float _snapSpeed;
         private float _timer;
@@ -33,17 +32,14 @@ namespace group_19_assignment4
 
         public void Update(GameTime gameTime)
         {
-            // We use (_timer + _timeOffset) to ensure unique instances have unique starting positions
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             float activeTime = _timer + _timeOffset;
             
-            // Level 1: Root Hierarchy (Requirement: Composition of at least two transformations)
-            // Using your preferred vertical movement math
+            // Level 1: Root Hierarchy
             float verticalMove = MathF.Sin(activeTime * 2) * 20f;
             _rootMatrix = Matrix.CreateScale(_scale) * Matrix.CreateTranslation(_basePosition.X, _basePosition.Y + verticalMove, 0);
             
-            // Level 2: Local Hierarchy (Requirement: Animation relative to the parent)
-            // Using your preferred snap speed and rotation limit
+            // Level 2: Local Hierarchy
             _jawRotation = MathF.Abs(MathF.Sin(activeTime * _snapSpeed)) * 0.6f;
         }
 
@@ -52,23 +48,22 @@ namespace group_19_assignment4
             // Applying Level 1 transformations via the Root Matrix
             spriteBatch.Begin(transformMatrix: _rootMatrix);
 
-            // Level 1 Object: The Stem (Drawn at local origin 0,0)
+            // Level 1 Object: The Stem
             spriteBatch.Draw(_stemTex, Vector2.Zero, Color.White);
 
-            // Level 2 Objects: The Jaws (Drawn relative to the Stem)
-            // Keeping your exact offsets and positions
+            // Level 2 Objects: The Jaws
             float leftOffset = 8.5f;
             float verticalPosition = 8f;
             Vector2 jawPivot = new Vector2((_stemTex.Width / 2) - leftOffset, verticalPosition);
                 
             Vector2 leftHinge = new Vector2(_jawLeftTex.Width, _jawLeftTex.Height); 
             spriteBatch.Draw(_jawLeftTex, 
-                jawPivot, // Positioned relative to Stem local coordinates
+                jawPivot,
                 null, Color.White, -_jawRotation, leftHinge, 1.0f, SpriteEffects.None, 0);
 
             Vector2 rightHinge = new Vector2(0, _jawRightTex.Height);
             spriteBatch.Draw(_jawRightTex, 
-                jawPivot, // Positioned relative to Stem local coordinates
+                jawPivot,
                 null, Color.White, _jawRotation, rightHinge, 1.0f, SpriteEffects.None, 0);
 
             spriteBatch.End();
