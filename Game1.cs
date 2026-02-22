@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -27,6 +28,11 @@ public class Game1 : Game
     private Vector2 _tallPipePos = new Vector2(678, 212);
     private float _shortPipeScale = .8f;
     private float _tallPipeScale = .8f;
+    
+    // Goomba
+    private Goomba goomba;
+    private bool squashed = false;
+    private MadGoomba _madGoomba;
     // -----------------------
 
     public Game1()
@@ -70,6 +76,13 @@ public class Game1 : Game
         
         piranha1 = new PiranhaPlant(stem, jLeft, jRight, new Vector2(610, 245), 3.0f, .15f, 0.0f); 
         piranha2 = new PiranhaPlant(stem, jLeft, jRight, new Vector2(687, 215), 6.0f, .15f, 1.5f); 
+        
+        // Goomba
+        Texture2D goombaBody = Content.Load<Texture2D>("goombaBody");
+        Texture2D eyes = Content.Load<Texture2D>("goombaEyes");
+        Texture2D feet = Content.Load<Texture2D>("goombaFeet");
+        goomba = new Goomba(goombaBody, feet, eyes, new Vector2(260f, 285f));
+        _madGoomba = new MadGoomba(goombaBody, feet, eyes, new Vector2(25f, 285f)); 
     }
 
     protected override void Update(GameTime gameTime)
@@ -80,7 +93,19 @@ public class Game1 : Game
         
         piranha1.Update(gameTime);
         piranha2.Update(gameTime);
-
+        goomba.Move(gameTime, [260f, 480f]);
+        
+        // CHANGE THIS TO CHOOSE WHEN TO SQUASH THE GOOMBA-------------
+        if (gameTime.TotalGameTime.TotalSeconds >= 7)
+        {
+            squashed = true;
+        }
+        // -------------------------------------------------------------
+        if (squashed)
+        {
+            goomba.Squash();
+        }
+        _madGoomba.Move(gameTime, [25f, 85f]);
         base.Update(gameTime);
     }
 
@@ -102,9 +127,11 @@ public class Game1 : Game
         
         // Long Pipe
         _spriteBatch.Draw(_tallPipeTex, _tallPipePos, null, Color.White, 0f, Vector2.Zero, _tallPipeScale, SpriteEffects.None, 0f);
-        
         _spriteBatch.End();
         
+        // Goomba
+        goomba.Draw(_spriteBatch);
+        _madGoomba.Draw(_spriteBatch);
         base.Draw(gameTime);
     }
 }
