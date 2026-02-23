@@ -23,3 +23,12 @@ The block enlarges and shrinks and the question mark flips upside down and bobs 
 The itemblock class contains Move, Enlarge, PulseQuestion functions to assist in manipulating
 movements of the item block and the question mark as independent objects. An unexpected challenge I faced was how small
 the scaling was and running the background music on my computer(since mp3 format was not compatible with my Mac).
+
+Piranha Plant Class: Annie Wang
+The intended animation of the Piranha Plant was to bob up and down vertically while its jaws snap open and shut in an
+oscillating cycle. The included class were PiranhaPlant.cs, which acted as the central controller for the root
+transformation of the entire Piranha Plant and the local child transformations of the animated jaw parts.
+In this class, the code used _rootMatrix to translate and scale the plant as a single unit, while secondary rotation and
+custom pivot offsets so that the jaws were hinged onto the stem.
+A challenge I encountered was aligning all of the components onto the coordinate space so that the Piranha Plants and
+the pipes overlay were at the correct location.
