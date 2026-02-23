@@ -1,0 +1,25 @@
+Theme: Super Mario Bros
+
+Overall Animation: The animation will depict Mario (red circle), moving towards the right while the goomba (brown circle) 
+moves towards the left. Mario will jump and land on the goomba, squishing it. The angry goomba (dark red circle) will
+move left and right at a faster speed than the normal goomba. Two piranha plants will emerge from the pipes at different
+times, they will differ in size and the speed at which they snap their jaws. The piranha plants will retreat into the
+pipes in time for Mario to stand under the right question block (golden circle) and jump to activate it. Luigi
+(green circle), will begin the animation by jumping to activate the left question block (yellow circle), then moving
+towards the right and jumping on top of the platform. Luigi will then move towards the left and stop moving at the
+left edge of the screen. When idle, the question blocks will have a slight change in scale, creating a pulsing effect.
+When activated, the question blocks will translate up before coming back to their original position, and the question
+mark will shrink until it disappears.
+
+Item Block Class: Kaitlin Jantaworn
+The intended animation of the Item Block was to layer it on top of the already existing Item block in teh scene but,
+while coding I had decided that it looked more aesthetically pleasing and comprehensible to the viewer to simply position
+it onto the brick. Also because the scene is quite small it was difficult to scale the question mark within a similar
+scale to the row of bricks. 
+The animation shows two instances of the Item Block one pulsing faster and scaled larger than the other. The instance
+on the left is yellow and contains a yellow question mark. The instance on the right is brown and contains a larger red
+question mark and pulses faster. 
+The block enlarges and shrinks and the question mark flips upside down and bobs within it.
+The itemblock class contains Move, Enlarge, PulseQuestion functions to assist in manipulating
+movements of the item block and the question mark as independent objects. An unexpected challenge I faced was how small
+the scaling was and running the background music on my computer(since mp3 format was not compatible with my Mac).
