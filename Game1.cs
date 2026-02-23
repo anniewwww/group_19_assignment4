@@ -15,8 +15,7 @@ public class Game1 : Game
     private Texture2D _background;
     
     // Song
-    // KAITLIN remove commented out again
-    // private Song _bgm;
+    private Song _bgm;
     
     // Piranha Plant
     private PiranhaPlant piranha1;
@@ -64,11 +63,10 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         // Background Song
-        // Kaitlin remove comments out when done
-        // _bgm = Content.Load<Song>("background_music");
-        // MediaPlayer.Volume = 0.3f; 
-        // MediaPlayer.IsRepeating = true; 
-        // MediaPlayer.Play(_bgm);
+        _bgm = Content.Load<Song>("background_music");
+        MediaPlayer.Volume = 0.3f; 
+        MediaPlayer.IsRepeating = true; 
+        MediaPlayer.Play(_bgm);
         
         // Background
         _background = Content.Load<Texture2D>("background");
