@@ -170,6 +170,11 @@ public class Game1 : Game
         _mario.Move(gameTime);
         _luigi.Move(gameTime);
         
+        // Item Block
+        _block1.Update(gameTime);
+        _block2.Update(gameTime);
+        
+        // Resets all objects
         float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
         _timer += dt;
         if (_timer >= 15f)
@@ -182,11 +187,9 @@ public class Game1 : Game
             piranha1.Reset();
             piranha2.Reset();
             squashed = false;
+            _block1.Reset();
+            _block2.Reset();
         }
-        
-        // Item Block
-        _block1.Update(gameTime);
-        _block2.Update(gameTime);
         
         base.Update(gameTime);
     }

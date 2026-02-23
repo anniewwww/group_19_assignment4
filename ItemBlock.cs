@@ -152,5 +152,16 @@ namespace group_19_assignment4
                 effects: SpriteEffects.None,
                 layerDepth: 0.1f);
         }
+
+        public void Reset()
+        {
+            _bobTime = 0f;
+            _scaleTime = 0f;
+            _questionTime = 0f;
+            _currentPosition = _startPosition;
+            _currentBlockScale = _baseBlockScale;
+            _currentQuestionScale = _baseQuestionScale;
+            BuildRootTransform();
+        }
     }
 }
