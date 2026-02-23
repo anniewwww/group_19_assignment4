@@ -13,12 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin background_music.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:background_music.mp3
-
 #begin background.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -103,6 +97,18 @@
 /processorParam:TextureFormat=Color
 /build:goombaFeet.png
 
+#begin ItemBlock.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:ItemBlock.jpg
+
 #begin Jaw Left.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -126,6 +132,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Jaw Right.png
+
+#begin QuestionMark.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:QuestionMark.png
 
 #begin Short Pipe 1.png
 /importer:TextureImporter
@@ -162,4 +180,5 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Tall Pipe.png
+
 

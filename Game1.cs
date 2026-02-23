@@ -40,8 +40,14 @@ public class Game1 : Game
     
     // Animation Timer
     private float _timer = 0f;
+    
+    // Item Blocks
+    private Texture2D _itemBlockTex;
+    private Texture2D _questionTex;
+    private ItemBlock _block1;
+    private ItemBlock _block2;
     // -----------------------
-
+    
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -97,6 +103,47 @@ public class Game1 : Game
         Texture2D characterLeg = Content.Load<Texture2D>("characterLeg");
         _mario = new Mario(new Vector2(230f, 285f), 1f, 1.25f, characterBody, characterArm, characterLeg, Color.White);
         _luigi = new Luigi(new Vector2(580f, 285f), 0.5f, 1.25f, characterBody, characterArm,  characterLeg, Color.LimeGreen);
+        
+        
+        // Item Block
+        _itemBlockTex = Content.Load<Texture2D>("ItemBlock");
+        _questionTex = Content.Load<Texture2D>("QuestionMark");
+        float desiredBlockPixels = 10f;
+        float blockBaseScale = desiredBlockPixels / _itemBlockTex.Width;
+
+        float questioBaseScale = .65f;
+        
+        // Item block instance 1
+        _block1 = new ItemBlock(
+            blockTexture: _itemBlockTex,
+            questionTexture: _questionTex,
+            basePosition: new Vector2(135f, 155f),
+            blockColor: new Color(240, 200, 40),
+            questionColor: Color.Yellow,
+            bobAmplitude: 10f,
+            bobSpeed: .05f,
+            baseBlockScale: blockBaseScale,
+            scaleAmplitude: .01f,
+            scaleSpeed: 1.0f,
+            baseQuestionScale: 6.0f,
+            questionScaleAmplitude: .18f,
+            questionPulseSpeed: 4.0f
+            );
+        _block2 = new ItemBlock(
+            blockTexture: _itemBlockTex,
+            questionTexture: _questionTex,
+            basePosition: new Vector2(640f, 90f),
+            blockColor: new Color(160, 110, 60),
+            questionColor: Color.Brown,
+            bobAmplitude: 10f,
+            bobSpeed: 1.0f,
+            baseBlockScale: blockBaseScale * 2.0f,
+            scaleAmplitude: .01f,
+            scaleSpeed: 2.0f,
+            baseQuestionScale: 8.0f,
+            questionScaleAmplitude: .50f,
+            questionPulseSpeed: 5.0f
+        );
     }
 
     protected override void Update(GameTime gameTime)
@@ -136,6 +183,11 @@ public class Game1 : Game
             piranha2.Reset();
             squashed = false;
         }
+        
+        // Item Block
+        _block1.Update(gameTime);
+        _block2.Update(gameTime);
+        
         base.Update(gameTime);
     }
 
@@ -150,10 +202,18 @@ public class Game1 : Game
         // Piranha
         piranha1.Draw(_spriteBatch);
         piranha2.Draw(_spriteBatch);
-
-        _spriteBatch.Begin();
+        
+        // Item Block
+        _spriteBatch.Begin(transformMatrix: _block1.RootTransform);
+        _block1.DrawLocal(_spriteBatch);
+        _spriteBatch.End();
+        
+        _spriteBatch.Begin(transformMatrix: _block2.RootTransform);
+        _block2.DrawLocal(_spriteBatch);
+        _spriteBatch.End();
         
         // Short Pipe
+        _spriteBatch.Begin();
         _spriteBatch.Draw(_shortPipeTex, _shortPipePos, null, Color.White, 0f, Vector2.Zero, _shortPipeScale, SpriteEffects.None, 0f);
         
         // Long Pipe
