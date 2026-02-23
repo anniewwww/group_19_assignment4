@@ -41,6 +41,29 @@ I made two child classes for Character, Mario and Luigi, so that they could over
 function and have their own set of instructions. This is how I achieved their separate paths that were described in 
 the overall animation description. 
 I had two big challenges when coding these classes. Having the characters land from a jump onto a block that is only 
+
+Goomba Class: Tong Wang
+The intended animation of the Goomba was to walk around by waddling its feet, which is done by alternating the
+scaling of each foot. The root component of the hierarchal matrix transformation is the goomba body, which translates
+horizontally. The next level of the hierarchy includes the eyes and the feet, meaning that the eyes and the feet
+move with the goomba body. The eyes translate horizontally in a range that permits the eyeballs to be within the eye 
+whites. They move in the direction of the goomba. For example, the eyes move to the right when the goomba is moving to 
+the right, and vice versa. The feet, as previously described, appear to be waddling by alternating the scaling of each
+foot, which is accomplished through a sinusoidal motion to ensure constant oscillation and smooth movements. I scaled
+the entire matrix down by 0.06f because the original images were way too big compared to the background image. An
+unexpected challenge I faced was figuring out what to put as the origin when drawing each image. My original
+understanding was that the origin coordinate was global rather than local, so the origin coordinates I would pick would
+be incorrect. I also scaled the textures individually rather than as a whole during the matrix transformations, so those
+incorrect origins in addition to the scaling skewed the position of the textures to be in the incorrect spots. This 
+problem was especially apparent when I was trying to scale the feet accordingly. Through a google search, I was able
+to understand that the origin coordinate is based on the top left corner of the texture, and this adjustment fixed
+everything.
+
+MadGoomba Class: Tong Wang
+This is a child class of the Goomba Class. I chose to make a variation of the default Goomba by making a child class
+because this variation will inherit all the necessary functions and variables of the parent class since mad goomba 
+is ultimately a goomba. The only changes I made to the original constructor was changing the color, stomping speed, and
+velocity.
 part of the background required a lot of manual translation from my part. I also had a hard time using scaling to 
 turn the character around. It would end up flipping it upside down as well and I could not figure it out. My solution 
 was to use sprite effects to turn the sprite around when drawing Luigi, which is why he was able to face left.
