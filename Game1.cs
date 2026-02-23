@@ -95,36 +95,40 @@ public class Game1 : Game
         // Item Block
         _itemBlockTex = Content.Load<Texture2D>("ItemBlock");
         _questionTex = Content.Load<Texture2D>("QuestionMark");
+        float desiredBlockPixels = 10f;
+        float blockBaseScale = desiredBlockPixels / _itemBlockTex.Width;
+
+        float questioBaseScale = .65f;
         
         // Item block instance 1
         _block1 = new ItemBlock(
             blockTexture: _itemBlockTex,
             questionTexture: _questionTex,
-            basePosition: new Vector2(150f, 170f),
+            basePosition: new Vector2(135f, 155f),
             blockColor: new Color(240, 200, 40),
-            questionColor: Color.Black,
+            questionColor: Color.Yellow,
             bobAmplitude: 10f,
-            bobSpeed: 2.2f,
-            baseBlockScale: .9f,
-            scaleAmplitude: .10f,
-            scaleSpeed: 2.0f,
-            baseQuestionScale: .85f,
+            bobSpeed: .05f,
+            baseBlockScale: blockBaseScale,
+            scaleAmplitude: .01f,
+            scaleSpeed: 1.0f,
+            baseQuestionScale: 6.0f,
             questionScaleAmplitude: .18f,
             questionPulseSpeed: 4.0f
             );
         _block2 = new ItemBlock(
             blockTexture: _itemBlockTex,
             questionTexture: _questionTex,
-            basePosition: new Vector2(520f, 160f),
+            basePosition: new Vector2(640f, 90f),
             blockColor: new Color(160, 110, 60),
-            questionColor: Color.Black,
-            bobAmplitude: 12f,
-            bobSpeed: 3.2f,
-            baseBlockScale: 1.05f,
-            scaleAmplitude: .12f,
-            scaleSpeed: 2.4f,
-            baseQuestionScale: .85f,
-            questionScaleAmplitude: .22f,
+            questionColor: Color.Brown,
+            bobAmplitude: 10f,
+            bobSpeed: 1.0f,
+            baseBlockScale: blockBaseScale * 2.0f,
+            scaleAmplitude: .01f,
+            scaleSpeed: 2.0f,
+            baseQuestionScale: 8.0f,
+            questionScaleAmplitude: .50f,
             questionPulseSpeed: 5.0f
         );
     }
@@ -179,6 +183,7 @@ public class Game1 : Game
         _spriteBatch.End();
         
         // Short Pipe
+        _spriteBatch.Begin();
         _spriteBatch.Draw(_shortPipeTex, _shortPipePos, null, Color.White, 0f, Vector2.Zero, _shortPipeScale, SpriteEffects.None, 0f);
         
         // Long Pipe
