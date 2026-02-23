@@ -33,6 +33,13 @@ public class Game1 : Game
     private Goomba goomba;
     private bool squashed = false;
     private MadGoomba _madGoomba;
+    
+    // Character
+    private Mario _mario;
+    private Luigi _luigi;
+    
+    // Animation Timer
+    private float _timer = 0f;
     // -----------------------
 
     public Game1()
@@ -68,7 +75,7 @@ public class Game1 : Game
         // Pipes
         _shortPipeTex = Content.Load<Texture2D>("Short Pipe 1");
         _tallPipeTex = Content.Load<Texture2D>("Tall Pipe");
-
+        
         // Piranha Plant
         Texture2D stem = Content.Load<Texture2D>("Stem");
         Texture2D jLeft = Content.Load<Texture2D>("Jaw Left");
@@ -81,8 +88,15 @@ public class Game1 : Game
         Texture2D goombaBody = Content.Load<Texture2D>("goombaBody");
         Texture2D eyes = Content.Load<Texture2D>("goombaEyes");
         Texture2D feet = Content.Load<Texture2D>("goombaFeet");
-        goomba = new Goomba(goombaBody, feet, eyes, new Vector2(260f, 285f));
+        goomba = new Goomba(goombaBody, feet, eyes, new Vector2(290f, 285f));
         _madGoomba = new MadGoomba(goombaBody, feet, eyes, new Vector2(25f, 285f)); 
+        
+        // Character
+        Texture2D characterBody = Content.Load<Texture2D>("characterBody");
+        Texture2D characterArm = Content.Load<Texture2D>("characterArm");
+        Texture2D characterLeg = Content.Load<Texture2D>("characterLeg");
+        _mario = new Mario(new Vector2(230f, 285f), 1f, 1.25f, characterBody, characterArm, characterLeg, Color.White);
+        _luigi = new Luigi(new Vector2(580f, 285f), 0.5f, 1.25f, characterBody, characterArm,  characterLeg, Color.LimeGreen);
     }
 
     protected override void Update(GameTime gameTime)
@@ -95,17 +109,33 @@ public class Game1 : Game
         piranha2.Update(gameTime);
         goomba.Move(gameTime, [260f, 480f]);
         
-        // CHANGE THIS TO CHOOSE WHEN TO SQUASH THE GOOMBA-------------
-        if (gameTime.TotalGameTime.TotalSeconds >= 7)
+        // SQUASH THE GOOMBA
+        if (_timer >= 4.25f)
         {
             squashed = true;
         }
-        // -------------------------------------------------------------
+
         if (squashed)
         {
             goomba.Squash();
         }
         _madGoomba.Move(gameTime, [25f, 85f]);
+        _mario.Move(gameTime);
+        _luigi.Move(gameTime);
+        
+        float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        _timer += dt;
+        if (_timer >= 15f)
+        {
+            _timer = 0f;
+            _mario.ResetSteps();
+            _luigi.ResetSteps();
+            goomba.Reset();
+            _madGoomba.Reset();
+            piranha1.Reset();
+            piranha2.Reset();
+            squashed = false;
+        }
         base.Update(gameTime);
     }
 
@@ -117,6 +147,7 @@ public class Game1 : Game
         _spriteBatch.Draw(_background, new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight), Color.White);
         _spriteBatch.End();
         
+        // Piranha
         piranha1.Draw(_spriteBatch);
         piranha2.Draw(_spriteBatch);
 
@@ -132,6 +163,11 @@ public class Game1 : Game
         // Goomba
         goomba.Draw(_spriteBatch);
         _madGoomba.Draw(_spriteBatch);
+        
+        // Character
+        _mario.Draw(_spriteBatch);
+        _luigi.Draw(_spriteBatch);
+        
         base.Draw(gameTime);
     }
 }

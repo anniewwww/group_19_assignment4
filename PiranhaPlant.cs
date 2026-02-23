@@ -68,5 +68,11 @@ namespace group_19_assignment4
 
             spriteBatch.End();
         }
+
+        public void Reset()
+        {
+            _timer = 0f;
+            _jawRotation = 0f;
+        }
     }
 }

@@ -7,6 +7,7 @@ namespace group_19_assignment4;
 
 public class Goomba
 {
+    private Vector2 _initialPosition;
     private Vector2 _position;
     protected Vector2 _velocity;
     private Vector2 _eyePos;
@@ -39,6 +40,7 @@ public class Goomba
         _eye = eye;
         _eyePos = new Vector2(50f, -30f);
         _opacity = 1f;
+        _initialPosition  = position;
         _position = position;
         _velocity = new Vector2(1f,0f);
         _bodyScale = Vector2.One;
@@ -109,6 +111,22 @@ public class Goomba
         _ultScale.Y *= 0.95f;
         _ultScale.X *= 0.98f;
         _opacity *= 0.95f;
+    }
+
+    public void Reset()
+    {
+        _position = _initialPosition;
+        _velocity = new Vector2(1f, 0f);
+        _time = 0f;
+        _squashed = false;
+        _opacity = 1f;
+        _ultScale = new Vector3(0.06f, 0.06f, 0.06f);
+        _bodyScale = Vector2.One;
+        _RFeetScale = Vector2.One;
+        _LFeetScale = Vector2.One;
+        _eyePos = new Vector2(50f, -30f);
+        _RFeetPos = new Vector2(-2f, 1f);
+        _LFeetPos = new Vector2(-480f, 1f);
     }
 
 }
