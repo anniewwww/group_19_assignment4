@@ -70,7 +70,7 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         // Background Song
-        _bgm = Content.Load<Song>("background_music");
+        _bgm = Content.Load<Song>("background_music.mp3");
         MediaPlayer.Volume = 0.3f; 
         MediaPlayer.IsRepeating = true; 
         MediaPlayer.Play(_bgm);
