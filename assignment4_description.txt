@@ -1,15 +1,13 @@
 Theme: Super Mario Bros
 
-Overall Animation: The animation will depict Mario (red circle), moving towards the right while the goomba (brown circle) 
-moves towards the left. Mario will jump and land on the goomba, squishing it. The angry goomba (dark red circle) will
-move left and right at a faster speed than the normal goomba. Two piranha plants will emerge from the pipes at different
-times, they will differ in size and the speed at which they snap their jaws. The piranha plants will retreat into the
-pipes in time for Mario to stand under the right question block (golden circle) and jump to activate it. Luigi
-(green circle), will begin the animation by jumping to activate the left question block (yellow circle), then moving
-towards the right and jumping on top of the platform. Luigi will then move towards the left and stop moving at the
-left edge of the screen. When idle, the question blocks will have a slight change in scale, creating a pulsing effect.
-When activated, the question blocks will translate up before coming back to their original position, and the question
-mark will shrink until it disappears.
+Overall Animation: The animation will depict the character Mario moving towards the right while the goomba also moves 
+right until colliding with the wall and moving left. Mario will jump and land on the goomba, squashing it. Mario will 
+then jump on top of the wall and jump again to get on top of the blocks in the sky. The angry goomba will move left and 
+right at a faster speed than the normal goomba. Two piranha plants will emerge from the pipes at different times, they 
+will also differ in the speed at which they snap their jaws. The character Luigi (green Mario) will begin the animation 
+by waiting, then jumping towards the left. Luigi will then continue moving left until jumping on top of the floating 
+blocks on the left side of the screen. The question blocks will have a change in scale, creating a pulsing effect, as 
+well as a slight translation.
 
 Item Block Class: Kaitlin Jantaworn
 The intended animation of the Item Block was to layer it on top of the already existing Item block in the scene but,
@@ -32,3 +30,17 @@ In this class, the code used _rootMatrix to translate and scale the plant as a s
 custom pivot offsets so that the jaws were hinged onto the stem.
 A challenge I encountered was aligning all of the components onto the coordinate space so that the Piranha Plants and
 the pipes overlay were at the correct location.
+
+Character Class: Christian Zamora
+The intended animation for the Character class was to use translation to move the character across the screen and use 
+scale to flip the character horizontally when it changed direction. The limbs of the character would also rotate while 
+the character walked. This was done using oscillation through a sin function tied to the ellapsed game time. The 
+character movement was implemented using steps, which I cycled through using a switch statement and a helper function 
+called NextStep(). 
+I made two child classes for Character, Mario and Luigi, so that they could override the Move 
+function and have their own set of instructions. This is how I achieved their separate paths that were described in 
+the overall animation description. 
+I had two big challenges when coding these classes. Having the characters land from a jump onto a block that is only 
+part of the background required a lot of manual translation from my part. I also had a hard time using scaling to 
+turn the character around. It would end up flipping it upside down as well and I could not figure it out. My solution 
+was to use sprite effects to turn the sprite around when drawing Luigi, which is why he was able to face left.
