@@ -15,7 +15,8 @@ public class Game1 : Game
     private Texture2D _background;
     
     // Song
-    private Song _bgm;
+    // KAITLIN remove commented out again
+    // private Song _bgm;
     
     // Piranha Plant
     private PiranhaPlant piranha1;
@@ -34,6 +35,12 @@ public class Game1 : Game
     private bool squashed = false;
     private MadGoomba _madGoomba;
     // -----------------------
+    
+    // Item Blocks
+    private Texture2D _itemBlockTex;
+    private Texture2D _questionTex;
+    private ItemBlock _block1;
+    private ItemBlock _block2;
 
     public Game1()
     {
@@ -57,10 +64,11 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         // Background Song
-        _bgm = Content.Load<Song>("background_music");
-        MediaPlayer.Volume = 0.3f; 
-        MediaPlayer.IsRepeating = true; 
-        MediaPlayer.Play(_bgm);
+        // Kaitlin remove comments out when done
+        // _bgm = Content.Load<Song>("background_music");
+        // MediaPlayer.Volume = 0.3f; 
+        // MediaPlayer.IsRepeating = true; 
+        // MediaPlayer.Play(_bgm);
         
         // Background
         _background = Content.Load<Texture2D>("background");
@@ -82,7 +90,43 @@ public class Game1 : Game
         Texture2D eyes = Content.Load<Texture2D>("goombaEyes");
         Texture2D feet = Content.Load<Texture2D>("goombaFeet");
         goomba = new Goomba(goombaBody, feet, eyes, new Vector2(260f, 285f));
-        _madGoomba = new MadGoomba(goombaBody, feet, eyes, new Vector2(25f, 285f)); 
+        _madGoomba = new MadGoomba(goombaBody, feet, eyes, new Vector2(25f, 285f));
+        
+        // Item Block
+        _itemBlockTex = Content.Load<Texture2D>("ItemBlock");
+        _questionTex = Content.Load<Texture2D>("QuestionMark");
+        
+        // Item block instance 1
+        _block1 = new ItemBlock(
+            blockTexture: _itemBlockTex,
+            questionTexture: _questionTex,
+            basePosition: new Vector2(150f, 170f),
+            blockColor: new Color(240, 200, 40),
+            questionColor: Color.Black,
+            bobAmplitude: 10f,
+            bobSpeed: 2.2f,
+            baseBlockScale: .9f,
+            scaleAmplitude: .10f,
+            scaleSpeed: 2.0f,
+            baseQuestionScale: .85f,
+            questionScaleAmplitude: .18f,
+            questionPulseSpeed: 4.0f
+            );
+        _block2 = new ItemBlock(
+            blockTexture: _itemBlockTex,
+            questionTexture: _questionTex,
+            basePosition: new Vector2(520f, 160f),
+            blockColor: new Color(160, 110, 60),
+            questionColor: Color.Black,
+            bobAmplitude: 12f,
+            bobSpeed: 3.2f,
+            baseBlockScale: 1.05f,
+            scaleAmplitude: .12f,
+            scaleSpeed: 2.4f,
+            baseQuestionScale: .85f,
+            questionScaleAmplitude: .22f,
+            questionPulseSpeed: 5.0f
+        );
     }
 
     protected override void Update(GameTime gameTime)
@@ -106,6 +150,11 @@ public class Game1 : Game
             goomba.Squash();
         }
         _madGoomba.Move(gameTime, [25f, 85f]);
+        
+        // Item Block
+        _block1.Update(gameTime);
+        _block2.Update(gameTime);
+        
         base.Update(gameTime);
     }
 
@@ -119,8 +168,15 @@ public class Game1 : Game
         
         piranha1.Draw(_spriteBatch);
         piranha2.Draw(_spriteBatch);
-
-        _spriteBatch.Begin();
+        
+        // Item Block
+        _spriteBatch.Begin(transformMatrix: _block1.RootTransform);
+        _block1.DrawLocal(_spriteBatch);
+        _spriteBatch.End();
+        
+        _spriteBatch.Begin(transformMatrix: _block2.RootTransform);
+        _block2.DrawLocal(_spriteBatch);
+        _spriteBatch.End();
         
         // Short Pipe
         _spriteBatch.Draw(_shortPipeTex, _shortPipePos, null, Color.White, 0f, Vector2.Zero, _shortPipeScale, SpriteEffects.None, 0f);
