@@ -12,7 +12,7 @@ When activated, the question blocks will translate up before coming back to thei
 mark will shrink until it disappears.
 
 Item Block Class: Kaitlin Jantaworn
-The intended animation of the Item Block was to layer it on top of the already existing Item block in teh scene but,
+The intended animation of the Item Block was to layer it on top of the already existing Item block in the scene but,
 while coding I had decided that it looked more aesthetically pleasing and comprehensible to the viewer to simply position
 it onto the brick. Also because the scene is quite small it was difficult to scale the question mark within a similar
 scale to the row of bricks. 
